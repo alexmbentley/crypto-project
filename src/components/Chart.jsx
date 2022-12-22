@@ -40,11 +40,10 @@ const Chart = () => {
     x: e[0],
     y: e[1].toFixed(2),
   }));
-  const options = {
-    responsive: true,
-  };
+  console.log(chartData.length, 'chart data');
+  const labels = chartData.map((e) => moment(e.x).format('MMMDD'));
   const data = {
-    labels: chartData.map((e) => moment(e.x).format('MMMDD')),
+    labels: labels,
     datasets: [
       {
         fill: true,
@@ -53,6 +52,17 @@ const Chart = () => {
         backgroundColor: 'rgba(0, 255, 255, 0.6)',
       },
     ],
+  };
+  const options = {
+    scales: {
+      y: {},
+      x: {
+        ticks: {
+          maxTicksLimit: labels.length / 24.2857143,
+        },
+      },
+    },
+    responsive: true,
   };
 
   return (
