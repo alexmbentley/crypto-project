@@ -12,7 +12,6 @@ const CoinDetails = () => {
     minimumFractionDigits: 0,
   }).format;
   const number = new Intl.NumberFormat().format;
-  console.log(response, '<< response');
 
   if (!response) {
     return <div>Loading...</div>;
