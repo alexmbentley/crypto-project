@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const MarketCoins = ({ coin, counter }) => {
   return (
-    <Link to={`coin/${coin.id}`}>
+    <Link to={`/coin/${coin.id}`}>
       <div className="grid grid-cols-3 sm:grid-cols-4 font-light p-2  border-black border-b hover:bg-gray-300">
         <div className="flex items-center gap-1 w-full">
           <span>{coin.market_cap_rank}.&nbsp;&nbsp;</span>
@@ -11,9 +11,11 @@ const MarketCoins = ({ coin, counter }) => {
           <p>{coin.name}</p>
           <span className="text-xs">({coin.symbol})</span>
         </div>
-        <p>${coin.current_price.toFixed(2)}</p>
+        <div className="flex items-center gap-1 w-full">
+          <p>${coin.current_price.toFixed(2)}</p>
+        </div>
         <span
-          className={`flex ${
+          className={`flex items-center ${
             coin.price_change_percentage_24h < 0
               ? 'text-red-600'
               : 'text-green-500'
