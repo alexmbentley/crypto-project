@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import { AuthContextProvider } from './context/AuthContext';
 import SignIn from './pages/SignIn';
 import Account from './pages/Account';
+import Protected from './components/Protected';
 function App() {
   return (
     <BrowserRouter>
@@ -15,7 +16,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/coin/:id" element={<CryptoStats />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/account" element={<Account />} />
+          <Route
+            path="/account"
+            element={
+              <Protected>
+                <Account />
+              </Protected>
+            }
+          />
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
