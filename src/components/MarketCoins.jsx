@@ -35,6 +35,7 @@ const MarketCoins = ({ coin, counter }) => {
             {new Intl.NumberFormat('en-US', {
               style: 'currency',
               currency: 'USD',
+              maximumFractionDigits: 0,
             }).format(coin.market_cap)}
           </span>
         </div>

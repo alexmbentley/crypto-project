@@ -40,7 +40,7 @@ const Chart = () => {
     x: e[0],
     y: e[1].toFixed(2),
   }));
-  console.log(chartData.length, 'chart data');
+
   const labels = chartData.map((e) => moment(e.x).format('MMMDD'));
   const data = {
     labels: labels,
