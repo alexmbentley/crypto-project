@@ -7,6 +7,8 @@ import { AuthContextProvider } from './context/AuthContext';
 import SignIn from './pages/SignIn';
 import Account from './pages/Account';
 import Protected from './components/Protected';
+import WatchList from './pages/WatchList';
+
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +23,14 @@ function App() {
             element={
               <Protected>
                 <Account />
+              </Protected>
+            }
+          />
+          <Route
+            path="/watchlist"
+            element={
+              <Protected>
+                <WatchList />
               </Protected>
             }
           />

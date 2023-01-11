@@ -6,12 +6,14 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+import { doc, getFirestore, onSnapshot } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [watchlist, setWatchlist] = useState([]);
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();

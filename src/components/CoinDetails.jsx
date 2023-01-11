@@ -1,11 +1,19 @@
 import { useParams } from 'react-router-dom';
 import ApiCaller from '../hooks/ApiCaller';
+import { UserAuth } from '../context/AuthContext';
+import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import { useEffect, useState } from 'react';
 
 const CoinDetails = () => {
   const { id } = useParams();
+  const { user } = UserAuth();
+  const [coin, setCoin] = useState();
+
   const { response } = ApiCaller(
     `coins/${id}?tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
   );
+
   const currency = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -13,7 +21,16 @@ const CoinDetails = () => {
   }).format;
   const number = new Intl.NumberFormat().format;
 
-  console.log(response, '<< response');
+  useEffect(() => {
+    setCoin(response);
+  }, [response]);
+
+  const addToWatchlist = async () => {
+    console.log('adding', coin.id, 'to watchlist');
+    await addDoc(collection(db, `watchlist/${user.uid}/coin`), {
+      coin: coin.id,
+    });
+  };
 
   if (!response) {
     return <div>Loading...</div>;
@@ -27,6 +44,15 @@ const CoinDetails = () => {
           {response.id.charAt(0).toUpperCase() + id.slice(1)} (
           {response.symbol.toUpperCase()})
         </h1>
+        {user && (
+          <button
+            onClick={addToWatchlist}
+            className="text-white bg-slate-400 hover:bg-gray-700 hover:text-white',
+          'block px-3 py-2 rounded-md text-base font-medium"
+          >
+            Add to watchlist
+          </button>
+        )}
       </div>
 
       <p>Market Cap: {currency(response.market_data.market_cap.usd)}</p>

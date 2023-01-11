@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../images/crypto.png';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 
@@ -18,10 +18,15 @@ function classNames(...classes) {
 }
 const Navbar = () => {
   const { user, logOut } = UserAuth();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSignOut = async () => {
     try {
       await logOut();
+      setIsOpen(true);
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +91,18 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
+              {isOpen && (
+                <div className="absolute top-20 left-0 w-full h-full flex items-center justify-center modal-background">
+                  <div className="bg-gray-700 pointer-events: none rounded-md p-6 sm:p-6 md:p-6 lg:p-8 m-6">
+                    <div className="text-lg font-medium text-white">
+                      You have logged out!
+                    </div>
+                    <div className="text-white">
+                      You can log in again by clicking the login button.
+                    </div>
+                  </div>
+                </div>
+              )}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
@@ -132,19 +149,33 @@ const Navbar = () => {
                           )}
                         </Menu.Item>
                       ) : null}
-
-                      {user?.displayName ? (
+                      {user?.email ? (
                         <Menu.Item>
                           {({ active }) => (
-                            <button
-                              onClick={handleSignOut}
+                            <a
+                              href="/watchlist"
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
+                              Watchlist
+                            </a>
+                          )}
+                        </Menu.Item>
+                      ) : null}
+                      {user?.displayName ? (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              onClick={handleSignOut}
+                              className={classNames(
+                                active ? 'bg-gray-100 cursor-pointer' : '',
+                                'block px-4 py-2 text-sm text-gray-700'
+                              )}
+                            >
                               Sign out
-                            </button>
+                            </a>
                           )}
                         </Menu.Item>
                       ) : (

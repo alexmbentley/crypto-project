@@ -10,6 +10,7 @@ const Market = () => {
   return (
     <div className="mt-6">
       <h1 className="text-xl font-bold">Cryptocurrencies by Market Cap</h1>
+      {console.log(response, '<< response')}
       {response &&
         response.map((coin) => (
           <MarketCoins key={coin.id} counter={counter} coin={coin} />
