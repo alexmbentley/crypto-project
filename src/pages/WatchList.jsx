@@ -7,6 +7,7 @@ const WatchList = () => {
   const { watchlist } = CoinData();
   const [watchData, setWatchData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
 
   axios.defaults.baseURL = 'https://api.coingecko.com/api/v3/';
 
@@ -28,6 +29,11 @@ const WatchList = () => {
         setLoading(false);
       }
     };
+    if (watchlist.length === 0) {
+      setTimeout(() => {
+        setShowMessage(true);
+      }, 1000);
+    }
 
     fetchData();
   }, [watchlist]);
@@ -44,6 +50,11 @@ const WatchList = () => {
     return (
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-bold mt-3 mb-3">Watchlist</h2>
+        {watchlist.length === 0 && showMessage && (
+          <p className="text-2xl font-bold absoloute text-center">
+            No coins in watchlist
+          </p>
+        )}
         {watchData.length === watchlist.length ? (
           <div>
             {watchData.map((coin) => (
