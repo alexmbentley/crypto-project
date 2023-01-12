@@ -9,7 +9,7 @@ const Signin = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      await googleSignIn();
+      await googleSignIn().then(() => navigate('/account'));
     } catch (error) {
       console.log(error);
     }
