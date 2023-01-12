@@ -1,19 +1,14 @@
 import { FiTrendingDown, FiTrendingUp } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-const MarketCoins = ({ coin }) => {
+const WatchlistCoins = ({ coin }) => {
   return (
     <Link to={`/coin/${coin.id}`}>
-      <div className="grid grid-cols-3 sm:grid-cols-4 font-light p-2  border-black border-b hover:bg-gray-300 scroll-container ">
+      <div className="grid grid-cols-3 sm:grid-cols-4 font-light p-2  border-black border rounded mb-1 hover:bg-gray-300">
         <div className="flex items-center gap-1 w-full">
-          <div className="hidden sm:block">
-            <span>{coin.market_cap_rank}.&nbsp;&nbsp;</span>
-          </div>
           <img className="w-7" src={coin.image} alt={coin.name} />
-          <p>{coin.name}</p>
-          <div className="hidden md:block">
-            <span className="text-xs">({coin.symbol})</span>
-          </div>
+          <p className="truncate">{coin.name}</p>
+          <span className="text-xs hidden sm:block">({coin.symbol})</span>
         </div>
         <div className="flex items-center gap-1 w-full">
           <p className="flex items-center sm:ml-0 ml-6">
@@ -54,4 +49,4 @@ const MarketCoins = ({ coin }) => {
   );
 };
 
-export default MarketCoins;
+export default WatchlistCoins;

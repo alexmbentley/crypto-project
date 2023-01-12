@@ -8,9 +8,7 @@ import { UserAuth } from '../context/AuthContext';
 
 const navigation = [
   { name: 'Crypto', href: '/', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'NFTs', href: '#', current: false },
 ];
 
 function classNames(...classes) {

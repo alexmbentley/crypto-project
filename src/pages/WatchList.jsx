@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import MarketCoins from '../components/MarketCoins';
 import CoinData from '../hooks/CoinData';
+import WatchlistCoins from '../components/WatchlistCoins';
 
 const WatchList = () => {
   const { watchlist } = CoinData();
@@ -36,7 +37,7 @@ const WatchList = () => {
     return (
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="mt-8">
-          <h1 className="text-xl font-bold mb-2">Loading...</h1>
+          <h1 className="text-xl font-bold m-2">Loading...</h1>
         </div>
       </div>
     );
@@ -44,12 +45,12 @@ const WatchList = () => {
     return (
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         {console.log(watchlist, watchData, '<<< watchlist and watchdata')}
-
+        <h2 className="text-2xl font-bold mt-3 mb-3">Watchlist</h2>
         {watchData.length === watchlist.length ? (
           <div>
             {console.log(watchlist.length, watchData.length)}
             {watchData.map((coin) => (
-              <MarketCoins key={coin.id} coin={coin} />
+              <WatchlistCoins key={coin.id} coin={coin} />
             ))}
           </div>
         ) : (

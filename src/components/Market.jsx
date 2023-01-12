@@ -9,8 +9,28 @@ const Market = () => {
   let counter = 0;
   return (
     <div className="mt-6">
-      <h1 className="text-xl font-bold">Cryptocurrencies by Market Cap</h1>
-      {console.log(response, '<< response')}
+      <h1 className="text-xl font-bold mt-3 mb-3">
+        Cryptocurrencies by Market Cap
+      </h1>
+      <div className="grid grid-cols-3 sm:grid-cols-4 font-light p-2  border-black border rounded hover:bg-gray-300 scroll-container ">
+        <div className="flex items-center gap-1 w-full">
+          <div className="sm:block">
+            <span>Coin:&nbsp;&nbsp;</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-1 w-full">
+          <p className="flex items-center sm:ml-0 ml-6">Price:</p>
+        </div>
+        <div className="flex items-center gap-1 w-full">
+          <span>
+            <p className="flex items-center sm:ml-0 ml-6">24H Change:</p>
+          </span>
+        </div>
+        <div className="hidden sm:block">
+          <span>Market Cap:</span>
+        </div>
+      </div>
+      {console.log(response)}
       {response &&
         response.map((coin) => (
           <MarketCoins key={coin.id} counter={counter} coin={coin} />

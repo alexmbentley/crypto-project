@@ -2,7 +2,14 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      'scroll-container': {
+        overflowX: 'scroll',
+        '::-webkit-scrollbar': {
+          display: 'none',
+        },
+      },
+    },
   },
   plugins: [],
 };

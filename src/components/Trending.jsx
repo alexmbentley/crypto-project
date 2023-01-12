@@ -5,7 +5,7 @@ const Trending = () => {
   const { response } = ApiCaller('search/trending');
 
   return (
-    <div className="mt-8">
+    <div className="mt-3">
       <h1 className="text-xl font-bold mb-2">Trending</h1>
       {response &&
         response.coins.map((coin) => (
