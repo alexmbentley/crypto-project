@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import ApiCaller from '../hooks/ApiCaller';
 import { UserAuth } from '../context/AuthContext';
-import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useEffect, useState } from 'react';
 

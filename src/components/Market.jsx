@@ -30,7 +30,6 @@ const Market = () => {
           <span>Market Cap:</span>
         </div>
       </div>
-      {console.log(response)}
       {response &&
         response.map((coin) => (
           <MarketCoins key={coin.id} counter={counter} coin={coin} />

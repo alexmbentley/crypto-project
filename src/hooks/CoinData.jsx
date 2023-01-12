@@ -1,5 +1,5 @@
 import { collection, getDocs } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 
@@ -20,9 +20,11 @@ const CoinData = () => {
     }
   };
 
+  const memoizedGetList = useCallback(getList, [user]);
+
   useEffect(() => {
-    getList();
-  }, [user]);
+    memoizedGetList();
+  }, [memoizedGetList]);
 
   return { watchlist, loading };
 };

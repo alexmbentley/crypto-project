@@ -22,7 +22,7 @@ const ApiCaller = (param) => {
 
   useEffect(() => {
     getData(param);
-  }, []);
+  }, [param]);
 
   return {
     response,

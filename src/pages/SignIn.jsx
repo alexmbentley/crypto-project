@@ -16,11 +16,10 @@ const Signin = () => {
   };
 
   useEffect(() => {
-    console.log(user, 'user inside useeffect');
     if (user && Object.keys(user).length !== 0) {
       navigate('/account');
     }
-  }, [user]);
+  }, [navigate, user]);
 
   // return to the useEffect, currently not working correctly
   return (

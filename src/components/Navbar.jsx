@@ -166,6 +166,7 @@ const Navbar = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <a
+                              href="/"
                               onClick={handleSignOut}
                               className={classNames(
                                 active ? 'bg-gray-100 cursor-pointer' : '',
