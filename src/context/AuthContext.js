@@ -4,6 +4,8 @@ import {
   signOut,
   onAuthStateChanged,
   signInWithRedirect,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from 'firebase/auth';
 import { auth } from '../firebase';
 
@@ -17,19 +19,31 @@ export const AuthContextProvider = ({ children }) => {
     signInWithRedirect(auth, provider);
   };
 
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const signIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   const logOut = () => {
-    signOut(auth);
+    return signOut(auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
-    <AuthContext.Provider value={{ googleSignIn, logOut, user }}>
+    <AuthContext.Provider
+      value={{ googleSignIn, logOut, user, signIn, createUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

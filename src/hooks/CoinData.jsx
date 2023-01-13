@@ -11,7 +11,9 @@ const CoinData = () => {
   const getList = async () => {
     try {
       setLoading(true);
-      const data = await getDocs(collection(db, `watchlist/${user.uid}/coin`));
+      const data = await getDocs(
+        collection(db, `watchlist/${user.email}/coin`)
+      );
       setWatchlist(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     } catch (error) {
       console.log(error);
@@ -26,7 +28,7 @@ const CoinData = () => {
     memoizedGetList();
   }, [memoizedGetList]);
 
-  return { watchlist, loading };
+  return { watchlist, loading, getList };
 };
 
 export default CoinData;

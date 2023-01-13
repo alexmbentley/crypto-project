@@ -162,7 +162,7 @@ const Navbar = () => {
                           )}
                         </Menu.Item>
                       ) : null}
-                      {user?.displayName ? (
+                      {user?.email ? (
                         <Menu.Item>
                           {({ active }) => (
                             <a
