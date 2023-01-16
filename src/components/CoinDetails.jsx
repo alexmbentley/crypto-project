@@ -88,7 +88,9 @@ const CoinDetails = () => {
           </button>
         )}
       </div>
-
+      <p className="mt-2">
+        Current Price: {response.market_data.current_price.usd}
+      </p>
       <p>Market Cap: {currency(response.market_data.market_cap.usd)}</p>
       <p>
         Fully Diluted Market Cap:{' '}

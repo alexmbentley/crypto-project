@@ -6,10 +6,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 
-const navigation = [
-  { name: 'Crypto', href: '/', current: true },
-  { name: 'NFTs', href: '#', current: false },
-];
+const navigation = [{ name: 'Crypto Home', href: '/', current: true }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
