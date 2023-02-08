@@ -2,11 +2,25 @@ import ApiCaller from '../hooks/ApiCaller';
 import MarketCoins from './MarketCoins';
 
 const Market = () => {
-  const { response } = ApiCaller(
+  const { response, error } = ApiCaller(
     'coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
   );
 
   let counter = 0;
+
+  if (!response && error) {
+    return (
+      <div className="mt-3">
+        {console.log(error)}
+        <h1 className="text-xl font-bold mb-2">
+          Cryptocurrencies by Market Cap
+        </h1>
+        Too many requests. I couldn't afford the APIs paid verion, sorry! <br />
+        Wait 5 minutes and try again or change ip addresss.
+      </div>
+    );
+  }
+
   return (
     <div className="mt-6">
       <h1 className="text-xl font-bold mt-3 mb-3">
@@ -30,10 +44,16 @@ const Market = () => {
           <span>Market Cap:</span>
         </div>
       </div>
-      {response &&
+      {!response ? (
+        <div className="mt-3">
+          <p className="text-xl">Loading...</p>
+        </div>
+      ) : (
+        response &&
         response.map((coin) => (
           <MarketCoins key={coin.id} counter={counter} coin={coin} />
-        ))}
+        ))
+      )}
     </div>
   );
 };

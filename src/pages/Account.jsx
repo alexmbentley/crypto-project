@@ -13,12 +13,21 @@ const Account = () => {
   };
 
   return (
-    <div className="w-[300px] m-auto">
-      <h1 className="text-center text-2xl font-bold pt-12">Account</h1>
+    <div className="w-[50%] text-center m-auto">
+      <h1 className="text-center text-2xl mb-7 font-bold pt-12">Account</h1>
       <div>
-        <p>Welcome, {user?.email}</p>
+        <a
+          href="/"
+          className="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none"
+        >
+          Back to home
+        </a>
+        <p className="mt-5">Welcome, {user?.email}</p>
       </div>
-      <button onClick={handleSignOut} className="border py-2 px-5 mt-10">
+      <button
+        onClick={handleSignOut}
+        className="mt-7 inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-gray-600 whitespace-no-wrap bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:shadow-none"
+      >
         Logout
       </button>
     </div>

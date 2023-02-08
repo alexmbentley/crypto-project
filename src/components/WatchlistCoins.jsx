@@ -12,7 +12,15 @@ const WatchlistCoins = ({ coin }) => {
         </div>
         <div className="flex items-center gap-1 w-full">
           <p className="flex items-center sm:ml-0 ml-6">
-            ${coin.current_price.toFixed(2)}
+            {coin.current_price < 1 ? (
+              <p>
+                Current Price: <br />${coin.current_price.toFixed(10)}
+              </p>
+            ) : (
+              <p>
+                Current Price: <br /> ${coin.current_price.toFixed(2)}
+              </p>
+            )}
           </p>
         </div>
         <div className="flex items-center gap-1 w-full">

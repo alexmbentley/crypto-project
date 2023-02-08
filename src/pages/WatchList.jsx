@@ -8,6 +8,7 @@ const WatchList = () => {
   const [watchData, setWatchData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
+  const [error, setError] = useState('');
 
   axios.defaults.baseURL = 'https://api.coingecko.com/api/v3/';
 
@@ -24,6 +25,7 @@ const WatchList = () => {
         const responses = await Promise.all(apiCalls);
         setWatchData(responses.map((response) => response.data[0]));
       } catch (error) {
+        setError(error);
         console.log(error);
       } finally {
         setLoading(false);
@@ -32,7 +34,7 @@ const WatchList = () => {
     if (watchlist.length === 0) {
       setTimeout(() => {
         setShowMessage(true);
-      }, 1000);
+      }, 1500);
     }
 
     fetchData();
@@ -61,6 +63,13 @@ const WatchList = () => {
               <WatchlistCoins key={coin.id} coin={coin} />
             ))}
           </div>
+        ) : error !== '' && error.message === 'Network Error' ? (
+          <p className="mt-5">
+            {console.log(error)}
+            Too many requests. I couldn't afford the APIs paid verion, sorry!{' '}
+            <br />
+            Wait 5 minutes and try again or change ip addresss.
+          </p>
         ) : (
           <div>
             <p>not rendered yet</p>

@@ -29,13 +29,26 @@ ChartJS.register(
 const Chart = () => {
   const { id } = useParams();
 
-  const { response } = ApiCaller(
+  const { response, error } = ApiCaller(
     `coins/${id}/market_chart?vs_currency=usd&days=7`
   );
 
   if (!response) {
-    return <div>Loading...</div>;
+    return (
+      <div className="mt-2">
+        <div className="flex items-center gap-2">
+          {!response &&
+          error !== '' &&
+          error.message === 'Network Error' ? null : !response &&
+            error !== '' &&
+            error.response.status === 404 ? null : (
+            <p className="text-2xl font-bold">{console.log(error)}Loading...</p>
+          )}
+        </div>
+      </div>
+    );
   }
+
   const chartData = response.prices.map((e) => ({
     x: e[0],
     y: e[1].toFixed(2),
@@ -66,7 +79,7 @@ const Chart = () => {
   };
 
   return (
-    <div>
+    <div className="mt-5 mb-10">
       <Line options={options} data={data} />
     </div>
   );

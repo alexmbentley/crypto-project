@@ -13,7 +13,7 @@ const CoinDetails = () => {
   const [coin, setCoin] = useState();
   const [inWatchlist, setInWatchList] = useState(false);
 
-  const { response } = ApiCaller(
+  const { response, error } = ApiCaller(
     `coins/${id}?tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
   );
 
@@ -55,7 +55,18 @@ const CoinDetails = () => {
     return (
       <div className="mt-2">
         <div className="flex items-center gap-2">
-          <p className="text-2xl font-bold">Loading...</p>
+          {!response && error !== '' && error.message === 'Network Error' ? (
+            <p className="mt-5">
+              {console.log(error)}
+              Too many requests. I couldn't afford the APIs paid verion, sorry!{' '}
+              <br />
+              Wait 5 minutes and try again or change ip addresss.
+            </p>
+          ) : !response && error !== '' && error.response.status === 404 ? (
+            <p className="mt-5">{console.log(error)}Coin doesn't exist!</p>
+          ) : (
+            <p className="text-2xl font-bold">{console.log(error)}Loading...</p>
+          )}
         </div>
       </div>
     );
@@ -88,21 +99,67 @@ const CoinDetails = () => {
           </button>
         )}
       </div>
-      <p className="mt-2">
-        Current Price: {response.market_data.current_price.usd}
-      </p>
-      <p>Market Cap: {currency(response.market_data.market_cap.usd)}</p>
-      <p>
-        Fully Diluted Market Cap:{' '}
-        {currency(response.market_data.fully_diluted_valuation.usd)}
-      </p>
-      <p>
-        24 Hour Trading Volume:{' '}
-        {currency(response.market_data.total_volume.usd)}
-      </p>
-      <p>
-        Circulating Supply: {number(response.market_data.circulating_supply)}{' '}
-      </p>
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-5 rounded border-black border mt-2">
+        <div className="col-span-1 my-5 ">
+          <div className="h-full">
+            <div className="grid grid-cols-1 gap-5 lg:gap-2 sm:grid-cols-2 h-full p-5 lg:p-2 lg:border-b-transparent lg:border-r  ">
+              <div className="flex text-center items-center  justify-center rounded-xl">
+                {response.market_data.current_price.usd < 1 ? (
+                  <p>
+                    Current Price: <br />$
+                    {response.market_data.current_price.usd.toFixed(10)}
+                  </p>
+                ) : (
+                  <p>
+                    Current Price: <br /> $
+                    {response.market_data.current_price.usd.toFixed(2)}
+                  </p>
+                )}
+              </div>
+              <div className="flex text-center items-center  justify-center rounded-xl">
+                <p>
+                  Market Cap: <br />
+                  {currency(response.market_data.market_cap.usd)}
+                </p>
+              </div>
+              <div className="flex text-center items-center  justify-center rounded-xl">
+                <p>
+                  Fully Diluted Market Cap: <br />{' '}
+                  {currency(response.market_data.fully_diluted_valuation.usd)}
+                </p>
+              </div>
+              <div className="flex text-center items-center  justify-center rounded-xl">
+                <p>
+                  24 Hour Trading Volume: <br />{' '}
+                  {currency(response.market_data.total_volume.usd)}
+                </p>
+              </div>
+              <div className="flex text-center items-center  justify-center rounded-xl">
+                <p>
+                  Circulating Supply: <br />{' '}
+                  {number(response.market_data.circulating_supply)}{' '}
+                </p>
+              </div>
+              <div className="flex text-center items-center  justify-center rounded-xl">
+                <p className="flex">
+                  All time high: <br />${response.market_data.ath.usd}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-span-2  border-black border-t lg:border-none">
+          <div className=" rounded">
+            <div className="flex flex-col px-3 lg:px-1 gap-2">
+              <p className="text-xl font-bold mt-5">About:</p>
+
+              <p className="mt-2 mb-5 h-56 overflow-auto">
+                {response.description.en.replace(/<\/?[^>]+>/gi, '')}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
