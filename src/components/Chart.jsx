@@ -42,7 +42,9 @@ const Chart = () => {
           error.message === 'Network Error' ? null : !response &&
             error !== '' &&
             error.response.status === 404 ? null : (
-            <p className="text-2xl font-bold">{console.log(error)}Loading...</p>
+            <p className="my-5 text-xl font-bold">
+              {console.log(error)}Loading...
+            </p>
           )}
         </div>
       </div>
@@ -80,6 +82,9 @@ const Chart = () => {
 
   return (
     <div className="mt-5 mb-10">
+      <h3 className="text-xl font-semibold text-center mt-8">
+        7 Day chart (USD)
+      </h3>
       <Line options={options} data={data} />
     </div>
   );

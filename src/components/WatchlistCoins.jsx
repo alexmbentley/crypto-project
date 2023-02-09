@@ -11,7 +11,7 @@ const WatchlistCoins = ({ coin }) => {
           <span className="text-xs hidden sm:block">({coin.symbol})</span>
         </div>
         <div className="flex items-center gap-1 w-full">
-          <p className="flex items-center sm:ml-0 ml-6">
+          <div className="flex items-center sm:ml-0 ml-6">
             {coin.current_price < 1 ? (
               <p>
                 Current Price: <br />${coin.current_price.toFixed(10)}
@@ -21,26 +21,26 @@ const WatchlistCoins = ({ coin }) => {
                 Current Price: <br /> ${coin.current_price.toFixed(2)}
               </p>
             )}
-          </p>
+          </div>
         </div>
         <div className="flex items-center gap-1 w-full">
-          <span
+          <p
             className={`flex items-center   ${
               coin.price_change_percentage_24h < 0
                 ? 'text-red-600'
                 : 'text-green-500'
             }`}
           >
-            <p className="flex items-center sm:ml-0 ml-6">
-              {coin.price_change_percentage_24h < 0 ? (
+            <span className="flex items-center sm:ml-0 ml-6">
+              {coin.spanrice_change_percentage_24h < 0 ? (
                 <FiTrendingDown />
               ) : (
                 <FiTrendingUp />
               )}
               &nbsp;&nbsp;
               {coin.price_change_percentage_24h.toFixed(2)}%
-            </p>
-          </span>
+            </span>
+          </p>
         </div>
         <div className="hidden sm:block">
           <p className="font-semibold">Market Cap</p>

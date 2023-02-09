@@ -65,7 +65,9 @@ const CoinDetails = () => {
           ) : !response && error !== '' && error.response.status === 404 ? (
             <p className="mt-5">{console.log(error)}Coin doesn't exist!</p>
           ) : (
-            <p className="text-2xl font-bold">{console.log(error)}Loading...</p>
+            <p className="my-5 text-xl font-bold">
+              {console.log(error)}Loading...
+            </p>
           )}
         </div>
       </div>
@@ -74,7 +76,7 @@ const CoinDetails = () => {
 
   return (
     <div className="mt-2">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 my-4">
         <img className="w-10" src={response.image.small} alt={response.id} />
         <h1 className="text-2xl font-bold">
           {response.id.charAt(0).toUpperCase() + id.slice(1)} (
@@ -148,10 +150,10 @@ const CoinDetails = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-2  border-black border-t lg:border-none">
+        <div className="col-span-2  border-t lg:border-none">
           <div className=" rounded">
-            <div className="flex flex-col px-3 lg:px-1 gap-2">
-              <p className="text-xl font-bold mt-5">About:</p>
+            <div className="flex flex-col px-3 lg:px-1 lg:mr-2 gap-2">
+              <p className="text-xl font-bold mt-5 ">About:</p>
 
               <p className="mt-2 mb-5 h-56 overflow-auto">
                 {response.description.en.replace(/<\/?[^>]+>/gi, '')}

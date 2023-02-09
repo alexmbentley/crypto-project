@@ -14,8 +14,8 @@ const WatchList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
-        setLoading(true);
         const apiCalls = watchlist.map((data) => {
           return axios.get(
             `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${data.coin}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
@@ -34,7 +34,7 @@ const WatchList = () => {
     if (watchlist.length === 0) {
       setTimeout(() => {
         setShowMessage(true);
-      }, 1500);
+      }, 2000);
     }
 
     fetchData();
@@ -44,6 +44,7 @@ const WatchList = () => {
     return (
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="mt-8">
+          <h2 className="text-2xl font-bold mt-3 mb-3">Watchlist</h2>
           <h1 className="text-xl font-bold m-2">Loading...</h1>
         </div>
       </div>

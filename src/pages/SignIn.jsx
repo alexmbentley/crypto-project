@@ -48,6 +48,9 @@ const Signin = () => {
               Sign up.
             </Link>
           </p>
+          <p>Feel free to use this test account:</p>
+          <p>Email: test@test.com</p>
+          <p>Password: password</p>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col py-2">
