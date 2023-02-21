@@ -32,7 +32,7 @@ const WatchlistCoins = ({ coin }) => {
             }`}
           >
             <span className="flex items-center sm:ml-0 ml-6">
-              {coin.spanrice_change_percentage_24h < 0 ? (
+              {coin.price_change_percentage_24h < 0 ? (
                 <FiTrendingDown />
               ) : (
                 <FiTrendingUp />
